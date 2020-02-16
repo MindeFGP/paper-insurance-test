@@ -51,7 +51,7 @@ const App = () => {
   return (
     <AppLayout onBackButtonClick={handleBackButtonClick} viewMode={state.viewMode} >
       {state.viewMode === ViewMode.PostList && (
-        <PostList listOfPostsModel={listOfPostsModel} postOnClick={handlePostClick} />
+        <PostList heading="All posts" listOfPostsModel={listOfPostsModel} postOnClick={handlePostClick} />
       )}
       {state.viewMode === ViewMode.PostDetails && (
         <h2>Post details</h2>

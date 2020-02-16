@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import { useAppData } from './utils/useAppData';
+import { AppLayout } from './components/appLayout/appLayout';
 
 enum ViewMode {
   PostList = "posts",
@@ -25,14 +26,14 @@ const App = () => {
   }
 
   return (
-    <div>
+    <AppLayout>
       {state.viewMode === ViewMode.PostList && (
         <h2>All posts</h2>
       )}
       {state.viewMode === ViewMode.PostDetails && (
         <h2>Post details</h2>
       )}
-    </div>
+    </AppLayout>
   )
 }
 

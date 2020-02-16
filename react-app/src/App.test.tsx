@@ -20,7 +20,7 @@ test("renders without crashing", () => {
   expect(app.exists()).toBe(true)
 });
 
-test("renders failure message when data not loaded", () => {
+test("doesnt render anything when data fails to load", () => {
   const app = shallow(<App />)
-  expect(app.find("div").first().text()).toBe("Failed to load data")
+  expect(app.children().length).toBe(0)
 });

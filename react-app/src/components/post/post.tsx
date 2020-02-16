@@ -13,10 +13,18 @@ export const Post = React.memo((props: PostProps) => {
             <CardHeader>
                 <div className="row">
                     <div className="col-8">
-                        <div>{props.postModel.title}</div>
-                        <button onClick={props.onClick}>Read post...</button>
+                        // place for author details
                     </div>
-                    <div className="col-4"></div>
+                    <div className="col-4">
+                        <div className="float-right">
+                            <button className="btn btn-primary" onClick={props.onClick}>Read post...</button>
+                        </div>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-12">
+                        {props.postModel.title}
+                    </div>
                 </div>
             </CardHeader>
         </Card>

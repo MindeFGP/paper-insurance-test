@@ -2,17 +2,17 @@ import React from "react"
 import { ListOfPosts } from "../../models/listOfPosts/listOfPosts"
 
 export interface PostListProps {
-    listOfPosts: ListOfPosts
+    listOfPostsModel: ListOfPosts
     postOnClick: (postId: number) => void
 }
 
 export const PostList = React.memo((props: PostListProps) => {
     return (
         <div>
-            {props.listOfPosts.posts.map(post => {
+            {props.listOfPostsModel.posts.map(postModel => {
                 return (
-                    <div key={post.id} className="post">
-                        {post.title}
+                    <div key={postModel.id} className="post">
+                        {postModel.title}
                     </div>
                 )
             })}

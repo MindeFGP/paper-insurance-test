@@ -36,7 +36,7 @@ const App = () => {
     })
   }
 
-  const listOfPosts = new ListOfPosts(appData)
+  const listOfPostsModel = new ListOfPosts(appData)
 
   const handlePostClick = (postId: number) => {
     setState(prevState => {
@@ -51,7 +51,7 @@ const App = () => {
   return (
     <AppLayout onBackButtonClick={handleBackButtonClick} viewMode={state.viewMode} >
       {state.viewMode === ViewMode.PostList && (
-        <PostList listOfPosts={listOfPosts} postOnClick={handlePostClick} />
+        <PostList listOfPostsModel={listOfPostsModel} postOnClick={handlePostClick} />
       )}
       {state.viewMode === ViewMode.PostDetails && (
         <h2>Post details</h2>

@@ -1,6 +1,5 @@
 import { AppDataInterface } from "../../utils/useAppData"
 import { ListOfPosts } from "./listOfPosts"
-import { PostApiInterface } from "../../apiInterface/postApiInterface"
 import { getMockPostData } from "../post/post.test"
 
 test("constructs model from app data without crashing", () => {

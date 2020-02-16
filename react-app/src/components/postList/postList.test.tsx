@@ -9,6 +9,6 @@ test("renders without crashing", () => {
     const listOfPostsModel = new ListOfPosts(appData)
     const handlePostClick = (postId: number) => {}
     
-    const postList = shallow(<PostList listOfPosts={listOfPostsModel} postOnClick={handlePostClick} />)
+    const postList = shallow(<PostList listOfPostsModel={listOfPostsModel} postOnClick={handlePostClick} />)
     expect(postList.exists()).toBe(true)
 })

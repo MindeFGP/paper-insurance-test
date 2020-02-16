@@ -8,6 +8,12 @@ export interface PostProps {
 }
 
 export const Post = React.memo((props: PostProps) => {
+    const readPostButton = props.onClick && (
+        <button className="btn btn-primary read-post-button" onClick={props.onClick}>
+            Read post...
+        </button>
+    )
+    
     return (
         <Card>
             <CardHeader>
@@ -17,9 +23,7 @@ export const Post = React.memo((props: PostProps) => {
                     </div>
                     <div className="col-4">
                         <div className="float-right">
-                            <button className="btn btn-primary read-post-button" onClick={props.onClick}>
-                                Read post...
-                            </button>
+                            {readPostButton}
                         </div>
                     </div>
                 </div>

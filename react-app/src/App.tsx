@@ -4,6 +4,8 @@ import { useAppData } from './utils/useAppData';
 import { AppLayout } from './components/appLayout/appLayout';
 import { PostList } from './components/postList/postList';
 import { ListOfPosts } from './models/listOfPosts/listOfPosts';
+import { Post } from './components/post/post';
+import { Post as PostModel } from './models/post/post';
 
 export enum ViewMode {
   PostList = "posts",
@@ -36,8 +38,6 @@ const App = () => {
     })
   }
 
-  const listOfPostsModel = new ListOfPosts(appData)
-
   const handlePostClick = (postId: number) => {
     setState(prevState => {
       const newState = {...prevState}
@@ -48,14 +48,28 @@ const App = () => {
     })
   }
 
+  let postListComponent
+  let postDetailsComponent
+
+  if (state.viewMode === ViewMode.PostList) {
+    const listOfPostsModel = new ListOfPosts(appData)
+    postListComponent = <PostList heading="All posts" listOfPostsModel={listOfPostsModel} postOnClick={handlePostClick} />
+  }
+
+  if (state.viewMode === ViewMode.PostDetails) {
+    const postData = appData.posts.find(post => {
+      return post.id === state.postId
+    })
+    if (postData) {
+      const postModel = new PostModel(postData)
+      postDetailsComponent = <Post postModel={postModel} />
+    }
+  }
+
   return (
     <AppLayout onBackButtonClick={handleBackButtonClick} viewMode={state.viewMode} >
-      {state.viewMode === ViewMode.PostList && (
-        <PostList heading="All posts" listOfPostsModel={listOfPostsModel} postOnClick={handlePostClick} />
-      )}
-      {state.viewMode === ViewMode.PostDetails && (
-        <h2>Post details</h2>
-      )}
+      {postListComponent}
+      {postDetailsComponent}
     </AppLayout>
   )
 }

@@ -23,3 +23,10 @@ test("read post button triggers onClick function", () => {
     post.find(".read-post-button").simulate("click")
     expect(buttonClicked).toBe(true)
 })
+
+test("read post button not rendered without onClick handler", () => {
+    const postData = getMockPostData()
+    const postModel = new PostModel(postData)
+    const post = shallow(<Post postModel={postModel} />)
+    expect(post.find(".read-post-button").exists()).toBe(false)
+})

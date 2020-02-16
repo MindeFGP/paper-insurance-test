@@ -17,7 +17,9 @@ export const Post = React.memo((props: PostProps) => {
                     </div>
                     <div className="col-4">
                         <div className="float-right">
-                            <button className="btn btn-primary" onClick={props.onClick}>Read post...</button>
+                            <button className="btn btn-primary read-post-button" onClick={props.onClick}>
+                                Read post...
+                            </button>
                         </div>
                     </div>
                 </div>

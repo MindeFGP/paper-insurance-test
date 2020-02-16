@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './App.css';
 import { useAppData } from './utils/useAppData';
 import { AppLayout } from './components/appLayout/appLayout';
+import { PostList } from './components/postList/postList';
+import { ListOfPosts } from './models/listOfPosts/listOfPosts';
 
 export enum ViewMode {
   PostList = "posts",
@@ -34,10 +36,22 @@ const App = () => {
     })
   }
 
+  const listOfPosts = new ListOfPosts(appData)
+
+  const handlePostClick = (postId: number) => {
+    setState(prevState => {
+      const newState = {...prevState}
+      newState.viewMode = ViewMode.PostDetails
+      newState.postId = postId
+
+      return newState
+    })
+  }
+
   return (
     <AppLayout onBackButtonClick={handleBackButtonClick} viewMode={state.viewMode} >
       {state.viewMode === ViewMode.PostList && (
-        <h2>All posts</h2>
+        <PostList listOfPosts={listOfPosts} postOnClick={handlePostClick} />
       )}
       {state.viewMode === ViewMode.PostDetails && (
         <h2>Post details</h2>

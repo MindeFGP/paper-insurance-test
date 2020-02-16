@@ -1,4 +1,5 @@
 import React from "react"
+import './backButton.css'
 
 export interface BackButtonProps {
     buttonText: string
@@ -7,7 +8,7 @@ export interface BackButtonProps {
 
 export const BackButton = React.memo((props: BackButtonProps) => {
     return (
-        <p onClick={props.onClick}>
+        <p className="back-button" onClick={props.onClick}>
             <i className="back-arrow"></i>
             <span className="back-button-text">{props.buttonText}</span>
         </p>

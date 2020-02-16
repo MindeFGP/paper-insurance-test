@@ -41,3 +41,12 @@ test("renders back button correctly", () => {
     )
     expect(appLayout.find(BackButton).exists()).toBe(true)
 })
+
+test("doesnt render back button if click handler not passed in", () => {
+    const appLayout = shallow(
+        <AppLayout viewMode={ViewMode.PostDetails}>
+            <div></div>
+        </AppLayout>
+    )
+    expect(appLayout.find(BackButton).exists()).toBe(false)
+})

@@ -1,5 +1,6 @@
 import React from "react"
 import { ListOfPosts } from "../../models/listOfPosts/listOfPosts"
+import { Post } from "../post/post"
 
 export interface PostListProps {
     listOfPostsModel: ListOfPosts
@@ -11,9 +12,7 @@ export const PostList = React.memo((props: PostListProps) => {
         <div>
             {props.listOfPostsModel.posts.map(postModel => {
                 return (
-                    <div key={postModel.id} className="post">
-                        {postModel.title}
-                    </div>
+                    <Post key={postModel.id} postModel={postModel} onClick={() => { props.postOnClick(postModel.id) }} />
                 )
             })}
         </div>

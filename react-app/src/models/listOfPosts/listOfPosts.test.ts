@@ -17,15 +17,27 @@ test("constructs model from app data without crashing", () => {
 })
 
 test("constructs model from app data correctly", () => {
-    const mockPost: PostApiInterface = getMockPostData()
+    const appData = getMockAppDataWith3Posts()
+    const listOfPostsModel = new ListOfPosts(appData)
+    expect(listOfPostsModel.posts.length).toBe(3)
+})
+
+export const getMockAppDataWith3Posts = (): AppDataInterface => {
+    const mockPost = getMockPostData()
+    mockPost.id = 1
+    const mockPost2 = getMockPostData()
+    mockPost2.id = 2
+    const mockPost3 = getMockPostData()
+    mockPost2.id = 3
+
     const appData: AppDataInterface = {
         areUsersLoaded: true,
         arePostsLoaded: true,
         areCommentsLoaded: true,
         users: [],
-        posts: [ mockPost ],
+        posts: [ mockPost, mockPost2, mockPost3 ],
         comments: []
     }
-    const listOfPostsModel = new ListOfPosts(appData)
-    expect(listOfPostsModel.posts.length).toBe(1)
-})
+
+    return appData
+}

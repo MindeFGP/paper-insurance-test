@@ -3,7 +3,7 @@ import './App.css';
 import { useAppData } from './utils/useAppData';
 import { AppLayout } from './components/appLayout/appLayout';
 
-enum ViewMode {
+export enum ViewMode {
   PostList = "posts",
   PostDetails = "post"
 }
@@ -25,8 +25,17 @@ const App = () => {
     return null
   }
 
+  const handleBackButtonClick = () => {
+    setState(prevState => {
+      const newState = {...prevState}
+      newState.viewMode = ViewMode.PostList
+
+      return newState
+    })
+  }
+
   return (
-    <AppLayout>
+    <AppLayout onBackButtonClick={handleBackButtonClick} viewMode={state.viewMode} >
       {state.viewMode === ViewMode.PostList && (
         <h2>All posts</h2>
       )}

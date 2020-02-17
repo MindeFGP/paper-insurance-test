@@ -1,6 +1,7 @@
 import React from "react"
 import { Post as PostModel } from "../../models/post/post"
 import { Card, CardHeader } from "reactstrap"
+import './post.css'
 
 export interface PostProps {
     postModel: PostModel
@@ -19,8 +20,10 @@ export const Post = React.memo((props: PostProps) => {
             <CardHeader>
                 <div className="row">
                     <div className="col-8">
-                        <img className="author-photo" src={props.postModel.author.photoUrl} alt="" />
-                        {props.postModel.author.name}
+                        <p>
+                            <img className="author-photo" src={props.postModel.author.photoUrl} alt="" />
+                            {props.postModel.author.name}
+                        </p>
                     </div>
                     <div className="col-4">
                         <div className="float-right">

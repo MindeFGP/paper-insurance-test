@@ -42,6 +42,10 @@ const App = () => {
     })
   }
 
+  const handleSearchSubmit = (queryValue: string) => {
+
+  }
+
   const handlePostClick = (postId: number) => {
     setState(prevState => {
       const newState = {...prevState}
@@ -95,7 +99,7 @@ const App = () => {
   }
 
   return (
-    <AppLayout onBackButtonClick={handleBackButtonClick} viewMode={state.viewMode} >
+    <AppLayout onBackButtonClick={handleBackButtonClick} viewMode={state.viewMode} onSearchSubmit={handleSearchSubmit} >
       {postListComponent}
       {postDetailsComponent}
     </AppLayout>

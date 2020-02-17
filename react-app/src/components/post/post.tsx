@@ -16,7 +16,7 @@ export const Post = React.memo((props: PostProps) => {
     )
     
     return (
-        <Card>
+        <Card className="post">
             <CardHeader>
                 <div className="row">
                     <div className="col-8">
@@ -32,7 +32,7 @@ export const Post = React.memo((props: PostProps) => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-12">
+                    <div className="col-12 post-title">
                         {props.postModel.title}
                     </div>
                 </div>

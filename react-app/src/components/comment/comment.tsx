@@ -1,6 +1,7 @@
 import React from "react"
 import { Comment as CommentModel } from "../../models/comment/comment"
 import { CardHeader, CardBody, Card } from "reactstrap"
+import "./comment.css"
 
 export interface CommentProps {
     commentModel: CommentModel
@@ -9,7 +10,7 @@ export interface CommentProps {
 export const Comment = React.memo((props: CommentProps) => {
     return (
         <div>
-            <Card>
+            <Card className="post-comment">
                 <CardHeader>
                     {props.commentModel.name}
                 </CardHeader>

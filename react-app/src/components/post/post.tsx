@@ -60,7 +60,7 @@ export const Post = React.memo((props: PostProps) => {
             {props.viewMode === ViewMode.PostDetails && (
                 <Comments heading="Comments" listOfCommentModels={props.postModel.getCommentsSorted()} onSubmit={handleCommentSubmit} />
             )}
-            {props.viewMode === ViewMode.SearchResults && (
+            {props.viewMode === ViewMode.SearchResults && (props.postModel.comments.length > 0) && (
                 <Card>
                     <Comments heading="Comments" listOfCommentModels={props.postModel.getCommentsSorted()} />
                 </Card>

@@ -9,6 +9,7 @@ export interface PostProps {
     postModel: PostModel
     onClick?: () => void
     viewMode: ViewMode
+    onCommentSubmit?: (value: string) => void
 }
 
 export const Post = React.memo((props: PostProps) => {
@@ -19,7 +20,7 @@ export const Post = React.memo((props: PostProps) => {
     )
 
     const handleCommentSubmit = (value: string) => {
-
+        props.onCommentSubmit && props.onCommentSubmit(value)
     }
     
     return (

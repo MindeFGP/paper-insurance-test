@@ -6,6 +6,8 @@ import { PostList } from './components/postList/postList';
 import { ListOfPosts } from './models/listOfPosts/listOfPosts';
 import { Post } from './components/post/post';
 import { Post as PostModel } from './models/post/post';
+import { postCommentToServer } from './utils/postToServer';
+import { User } from './models/user/user';
 
 export enum ViewMode {
   PostList = "posts",
@@ -13,17 +15,19 @@ export enum ViewMode {
 }
 
 interface AppViewModeInterface {
+  refreshCounter: number
   viewMode: ViewMode
   postId?: number
 }
 
 const App = () => {
   const initialState: AppViewModeInterface = {
+    refreshCounter: 0,
     viewMode: ViewMode.PostList
   }
   const [state, setState] = useState(initialState)
 
-  const appData = useAppData()
+  const appData = useAppData(state.refreshCounter)
 
   if (!appData.areUsersLoaded || !appData.arePostsLoaded || !appData.areCommentsLoaded) {
     return null
@@ -67,10 +71,25 @@ const App = () => {
       const commentsData = appData.comments.filter(commentData => {
         return commentData.postId === postData.id
       })
-      
+
       if (authorData) {
+        const handleCommentSubmit = (value: string) => {
+          const hardcodedUserData = appData.users[0]
+          if (hardcodedUserData && state.postId) {
+            const hardcodedUser = new User(hardcodedUserData)
+            postCommentToServer(hardcodedUser, state.postId, value, () => {
+              setState(prevState => {
+                const newState = {...prevState}
+                newState.refreshCounter += 1
+
+                return newState
+              })
+            })
+          }
+        }
+
         const postModel = new PostModel(postData, authorData, commentsData)
-        postDetailsComponent = <Post postModel={postModel} viewMode={state.viewMode} />
+        postDetailsComponent = <Post postModel={postModel} viewMode={state.viewMode} onCommentSubmit={handleCommentSubmit}/>
       }
     }
   }

@@ -66,7 +66,7 @@ const App = () => {
       })
       if (authorData) {
         const postModel = new PostModel(postData, authorData)
-        postDetailsComponent = <Post postModel={postModel} />
+        postDetailsComponent = <Post postModel={postModel} viewMode={state.viewMode} />
       }
     }
   }

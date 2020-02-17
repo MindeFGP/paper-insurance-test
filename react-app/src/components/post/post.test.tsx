@@ -6,11 +6,13 @@ import { getMockPostData } from "../../models/post/post.test"
 import { getMockUserData } from "../../models/user/user.test"
 import { ViewMode } from "../../App"
 import { CardBody } from "reactstrap"
+import { getMockCommentData } from "../../models/comment/comment.test"
 
 test("renders without crashing", () => {
     const postData = getMockPostData()
     const userData = getMockUserData()
-    const postModel = new PostModel(postData, userData)
+    const commentsData = [ getMockCommentData() ]
+    const postModel = new PostModel(postData, userData, commentsData)
     const post = shallow(<Post postModel={postModel} viewMode={ViewMode.PostList} />)
     expect(post.exists()).toBe(true)
 })
@@ -18,7 +20,8 @@ test("renders without crashing", () => {
 test("read post button triggers onClick function", () => {
     const postData = getMockPostData()
     const userData = getMockUserData()
-    const postModel = new PostModel(postData, userData)
+    const commentsData = [ getMockCommentData() ]
+    const postModel = new PostModel(postData, userData, commentsData)
     let buttonClicked = false
     const handleClick = () => {
         buttonClicked = true
@@ -32,7 +35,8 @@ test("read post button triggers onClick function", () => {
 test("read post button not rendered without onClick handler", () => {
     const postData = getMockPostData()
     const userData = getMockUserData()
-    const postModel = new PostModel(postData, userData)
+    const commentsData = [ getMockCommentData() ]
+    const postModel = new PostModel(postData, userData, commentsData)
     const post = shallow(<Post postModel={postModel} viewMode={ViewMode.PostList} />)
     expect(post.find(".read-post-button").exists()).toBe(false)
 })
@@ -40,7 +44,8 @@ test("read post button not rendered without onClick handler", () => {
 test("post body rendered in post details view", () => {
     const postData = getMockPostData()
     const userData = getMockUserData()
-    const postModel = new PostModel(postData, userData)
+    const commentsData = [ getMockCommentData() ]
+    const postModel = new PostModel(postData, userData, commentsData)
     const post = shallow(<Post postModel={postModel} viewMode={ViewMode.PostDetails} />)
     expect(post.find(CardBody).exists()).toBe(true)
 })

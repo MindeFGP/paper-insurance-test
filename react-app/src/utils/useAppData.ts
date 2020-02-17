@@ -13,7 +13,7 @@ export interface AppDataInterface {
     comments: CommentApiInterface[]
 }
 
-export const useAppData = () => {
+export const useAppData = (refreshCounter: number) => {
     const initialState: AppDataInterface = {
         areUsersLoaded: false,
         arePostsLoaded: false,
@@ -64,7 +64,7 @@ export const useAppData = () => {
                 return newState
             })
         })
-    }, [])
+    }, [ refreshCounter ])
 
     return state
 }

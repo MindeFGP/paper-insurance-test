@@ -33,4 +33,8 @@ export class Post implements PostModelInterface {
             }
         })
     }
+
+    getCommentsSorter = (): Comment[] => {
+        return this.comments.sort((a, b) => (a.id < b.id) ? 1 : -1)
+    }
 }

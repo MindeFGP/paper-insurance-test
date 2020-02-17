@@ -35,4 +35,8 @@ export class ListOfPosts implements ListOfPostsModelInterface {
             return listOfPostIds.includes(post.id) || (post.comments.length > 0)
         })
     }
+
+    getPostsSorted = (): Post[] => {
+        return this.posts.sort((a, b) => (a < b) ? 1 : -1)
+    }
 }

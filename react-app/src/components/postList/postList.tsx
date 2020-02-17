@@ -17,7 +17,7 @@ export const PostList = React.memo((props: PostListProps) => {
             {props.listOfPostsModel.posts.length === 0 && (
                 <div>No posts found</div>
             )}
-            {props.listOfPostsModel.posts.map(postModel => {
+            {props.listOfPostsModel.getPostsSorted().map(postModel => {
                 return (
                     <Post key={postModel.id} postModel={postModel} viewMode={props.viewMode} onClick={() => { props.postOnClick(postModel.id) }} />
                 )

@@ -53,7 +53,7 @@ export const Post = React.memo((props: PostProps) => {
                 )}
             </Card>
             {props.viewMode === ViewMode.PostDetails && (
-                <Comments heading="Comments" listOfCommentModels={props.postModel.getCommentsSorter()} onSubmit={handleCommentSubmit} />
+                <Comments heading="Comments" listOfCommentModels={props.postModel.getCommentsSorted()} onSubmit={handleCommentSubmit} />
             )}
         </div>
     )

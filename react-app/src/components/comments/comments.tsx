@@ -6,7 +6,7 @@ import "./comments.css"
 
 export interface CommentsProps {
     heading: string
-    onSubmit: (value: string) => void
+    onSubmit?: (value: string) => void
     listOfCommentModels: CommentModel[]
 }
 
@@ -19,7 +19,7 @@ export const Comments = React.memo((props: CommentsProps) => {
     }
 
     const handleCommentSubmit = () => {
-        if (state.commentInputValue !== "") {
+        if (props.onSubmit && (state.commentInputValue !== "")) {
             props.onSubmit(state.commentInputValue)
             setState({ commentInputValue: "" })
         }
@@ -29,15 +29,17 @@ export const Comments = React.memo((props: CommentsProps) => {
         <div>
             <h2>{props.heading}</h2>
 
-            <div className="add-comment-section">
-                <Form>
-                    <Label>Add comment:</Label>
-                    <FormGroup>
-                        <Input type="text" value={state.commentInputValue} onChange={handleCommentInputChange} />
-                    </FormGroup>
-                    <Button className="btn btn-primary" onClick={handleCommentSubmit}>Add comment</Button>
-                </Form>
-            </div>
+            {props.onSubmit && (
+                <div className="add-comment-section">
+                    <Form>
+                        <Label>Add comment:</Label>
+                        <FormGroup>
+                            <Input type="text" value={state.commentInputValue} onChange={handleCommentInputChange} />
+                        </FormGroup>
+                        <Button className="btn btn-primary" onClick={handleCommentSubmit}>Add comment</Button>
+                    </Form>
+                </div>
+            )}
 
             {props.listOfCommentModels.map(commentModel => {
                 return (

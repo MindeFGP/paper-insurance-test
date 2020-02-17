@@ -8,16 +8,19 @@ import { Post } from './components/post/post';
 import { Post as PostModel } from './models/post/post';
 import { postCommentToServer } from './utils/postToServer';
 import { User } from './models/user/user';
+import { SearchResults } from './components/searchResults/searchResults';
 
 export enum ViewMode {
   PostList = "posts",
-  PostDetails = "post"
+  PostDetails = "post",
+  SearchResults = "search"
 }
 
 interface AppViewModeInterface {
   refreshCounter: number
   viewMode: ViewMode
   postId?: number
+  queryValue?: string
 }
 
 const App = () => {
@@ -42,6 +45,16 @@ const App = () => {
     })
   }
 
+  const handleSearchSubmit = (queryValue: string) => {
+    setState(prevState => {
+      const newState = {...prevState}
+      newState.viewMode = ViewMode.SearchResults
+      newState.queryValue = queryValue
+
+      return newState
+    })
+  }
+
   const handlePostClick = (postId: number) => {
     setState(prevState => {
       const newState = {...prevState}
@@ -54,13 +67,14 @@ const App = () => {
 
   let postListComponent
   let postDetailsComponent
+  let searchResultsComponent
 
   if (state.viewMode === ViewMode.PostList) {
     const listOfPostsModel = new ListOfPosts(appData)
-    postListComponent = <PostList heading="All posts" listOfPostsModel={listOfPostsModel} postOnClick={handlePostClick} />
+    postListComponent = <PostList heading="All posts" viewMode={ViewMode.PostList} listOfPostsModel={listOfPostsModel} postOnClick={handlePostClick} />
   }
 
-  if (state.viewMode === ViewMode.PostDetails) {
+  if (state.viewMode === ViewMode.PostDetails && state.postId) {
     const postData = appData.posts.find(post => {
       return post.id === state.postId
     })
@@ -94,10 +108,15 @@ const App = () => {
     }
   }
 
+  if (state.viewMode === ViewMode.SearchResults && state.queryValue) {
+    searchResultsComponent = <SearchResults appData={appData} queryValue={state.queryValue} postOnClick={handlePostClick} />
+  }
+
   return (
-    <AppLayout onBackButtonClick={handleBackButtonClick} viewMode={state.viewMode} >
+    <AppLayout onBackButtonClick={handleBackButtonClick} viewMode={state.viewMode} onSearchSubmit={handleSearchSubmit} >
       {postListComponent}
       {postDetailsComponent}
+      {searchResultsComponent}
     </AppLayout>
   )
 }

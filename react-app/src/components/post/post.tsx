@@ -19,7 +19,8 @@ export const Post = React.memo((props: PostProps) => {
             <CardHeader>
                 <div className="row">
                     <div className="col-8">
-                        // place for author details
+                        <img className="author-photo" src={props.postModel.author.photoUrl} alt="" />
+                        {props.postModel.author.name}
                     </div>
                     <div className="col-4">
                         <div className="float-right">

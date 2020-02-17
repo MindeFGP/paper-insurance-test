@@ -10,8 +10,13 @@ export class ListOfPosts implements ListOfPostsModelInterface {
 
     constructor(appData: AppDataInterface) {
         appData.posts.forEach(postData => {
-            const post = new Post(postData)
-            this.posts.push(post)
+            const authorData = appData.users.find(userData => {
+                return userData.id === postData.userId
+            })
+            if (authorData) {
+                const post = new Post(postData, authorData)
+                this.posts.push(post)
+            }
         })
     }
 }

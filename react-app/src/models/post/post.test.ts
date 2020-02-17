@@ -1,9 +1,11 @@
 import { Post } from "./post"
 import { PostApiInterface } from "../../apiInterface/postApiInterface"
+import { getMockUserData } from "../user/user.test"
 
 test("constructs model correctly from api data", () => {
-    const postApiData: PostApiInterface = getMockPostData()
-    const postModel = new Post(postApiData)
+    const postApiData = getMockPostData()
+    const userApiData = getMockUserData()
+    const postModel = new Post(postApiData, userApiData)
     expect(postModel.id).toBe(6)
     expect(postModel.title).toBe("test title")
     expect(postModel.body).toBe("test body")

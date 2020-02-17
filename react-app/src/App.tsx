@@ -61,8 +61,13 @@ const App = () => {
       return post.id === state.postId
     })
     if (postData) {
-      const postModel = new PostModel(postData)
-      postDetailsComponent = <Post postModel={postModel} />
+      const authorData = appData.users.find(userData => {
+        return userData.id === postData.userId
+      })
+      if (authorData) {
+        const postModel = new PostModel(postData, authorData)
+        postDetailsComponent = <Post postModel={postModel} />
+      }
     }
   }
 

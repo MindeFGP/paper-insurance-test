@@ -1,6 +1,7 @@
 import { AppDataInterface } from "../../utils/useAppData"
 import { ListOfPosts } from "./listOfPosts"
 import { getMockPostData } from "../post/post.test"
+import { getMockUserData } from "../user/user.test"
 
 test("constructs model from app data without crashing", () => {
     const appData: AppDataInterface = {
@@ -28,12 +29,13 @@ export const getMockAppDataWith3Posts = (): AppDataInterface => {
     mockPost2.id = 2
     const mockPost3 = getMockPostData()
     mockPost2.id = 3
+    const mockUser = getMockUserData()
 
     const appData: AppDataInterface = {
         areUsersLoaded: true,
         arePostsLoaded: true,
         areCommentsLoaded: true,
-        users: [],
+        users: [ mockUser ],
         posts: [ mockPost, mockPost2, mockPost3 ],
         comments: []
     }

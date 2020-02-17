@@ -3,17 +3,20 @@ import { shallow } from "enzyme"
 import { Post as PostModel } from "../../models/post/post"
 import { Post } from "./post"
 import { getMockPostData } from "../../models/post/post.test"
+import { getMockUserData } from "../../models/user/user.test"
 
 test("renders without crashing", () => {
     const postData = getMockPostData()
-    const postModel = new PostModel(postData)
+    const userData = getMockUserData()
+    const postModel = new PostModel(postData, userData)
     const post = shallow(<Post postModel={postModel} />)
     expect(post.exists()).toBe(true)
 })
 
 test("read post button triggers onClick function", () => {
     const postData = getMockPostData()
-    const postModel = new PostModel(postData)
+    const userData = getMockUserData()
+    const postModel = new PostModel(postData, userData)
     let buttonClicked = false
     const handleClick = () => {
         buttonClicked = true
@@ -26,7 +29,8 @@ test("read post button triggers onClick function", () => {
 
 test("read post button not rendered without onClick handler", () => {
     const postData = getMockPostData()
-    const postModel = new PostModel(postData)
+    const userData = getMockUserData()
+    const postModel = new PostModel(postData, userData)
     const post = shallow(<Post postModel={postModel} />)
     expect(post.find(".read-post-button").exists()).toBe(false)
 })

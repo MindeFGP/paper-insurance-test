@@ -25,6 +25,14 @@ export class ListOfPosts implements ListOfPostsModelInterface {
     }
 
     filterOutForQueryResults = (listOfPostIds: number[], listOfCommentIds: number[]) => {
-        
+        this.posts.forEach(post => {
+            post.comments = post.comments.filter(comment => {
+                return listOfCommentIds.includes(comment.id)
+            })
+        })
+
+        this.posts = this.posts.filter(post => {
+            return listOfPostIds.includes(post.id) || (post.comments.length > 0)
+        })
     }
 }

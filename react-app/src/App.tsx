@@ -71,7 +71,7 @@ const App = () => {
 
   if (state.viewMode === ViewMode.PostList) {
     const listOfPostsModel = new ListOfPosts(appData)
-    postListComponent = <PostList heading="All posts" listOfPostsModel={listOfPostsModel} postOnClick={handlePostClick} />
+    postListComponent = <PostList heading="All posts" viewMode={ViewMode.PostList} listOfPostsModel={listOfPostsModel} postOnClick={handlePostClick} />
   }
 
   if (state.viewMode === ViewMode.PostDetails && state.postId) {

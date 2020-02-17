@@ -10,3 +10,15 @@
 .post-title {
     font-weight: bold;
 }
+
+.post-container {
+    margin-bottom: 15px;
+}
+
+.post-container .post {
+    margin-bottom: 0;
+}
+
+.post-container-search-result .post-comment {
+    margin-bottom: 0;
+}

@@ -3,6 +3,7 @@ import { AppDataInterface } from "../../utils/useAppData"
 import { ListOfPosts } from "../../models/listOfPosts/listOfPosts"
 import { PostList } from "../postList/postList"
 import { getPostIdsForQuery, getCommentIdsForQuery } from "../../utils/getAppData"
+import { ViewMode } from "../../App"
 
 export interface SearchResultsProps {
     appData: AppDataInterface,
@@ -47,6 +48,6 @@ export const SearchResults = React.memo((props: SearchResultsProps) => {
     listOfPostsModel.filterOutForQueryResults(state.listOfPostIds, state.listOfCommentIds)
 
     return (
-        <PostList heading="Search results" listOfPostsModel={listOfPostsModel} postOnClick={props.postOnClick} />
+        <PostList heading="Search results" viewMode={ViewMode.SearchResults} listOfPostsModel={listOfPostsModel} postOnClick={props.postOnClick} />
     )
 })

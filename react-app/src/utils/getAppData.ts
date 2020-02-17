@@ -2,10 +2,13 @@ import { UserApiInterface } from "../apiInterface/userApiInterface"
 import { PostApiInterface } from "../apiInterface/postApiInterface"
 import { CommentApiInterface } from "../apiInterface/commentApiInterface"
 
-export const getAppData = (table: string, callBack: (response: UserApiInterface[] | PostApiInterface[] | CommentApiInterface[] | undefined) => void) => {
+export const getAppData = (table: string, callBack: (response: UserApiInterface[] | PostApiInterface[] | CommentApiInterface[] | undefined) => void, query?: string) => {
     const serverUrl = "http://localhost:3000"
 
-    const getRequestUrl = serverUrl + "/" + table
+    let getRequestUrl = serverUrl + "/" + table
+    if (query) {
+        getRequestUrl += "?q=" + query
+    }
 
     var xhr = new XMLHttpRequest()
 
@@ -22,4 +25,30 @@ export const getAppData = (table: string, callBack: (response: UserApiInterface[
 
     xhr.open("GET", getRequestUrl, true)
     xhr.send(null)
+}
+
+export const getPostIdsForQuery = (queryValue: string, callBack: (result: number[]) => void) => {
+    getAppData("posts", (response) => {
+        const resultsArray: number[] = []
+        if (response) {
+            response.forEach((postData: UserApiInterface | PostApiInterface | CommentApiInterface) => {
+                resultsArray.push(postData.id)
+            })
+        }
+
+        callBack(resultsArray)
+    }, queryValue)
+}
+
+export const getCommentIdsForQuery = (queryValue: string, callBack: (result: number[]) => void) => {
+    getAppData("comments", (response) => {
+        const resultsArray: number[] = []
+        if (response) {
+            response.forEach((postData: UserApiInterface | PostApiInterface | CommentApiInterface) => {
+                resultsArray.push(postData.id)
+            })
+        }
+
+        callBack(resultsArray)
+    }, queryValue)
 }

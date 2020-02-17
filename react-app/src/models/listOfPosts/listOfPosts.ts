@@ -23,4 +23,8 @@ export class ListOfPosts implements ListOfPostsModelInterface {
             }
         })
     }
+
+    filterOutForQueryResults = (listOfPostIds: number[], listOfCommentIds: number[]) => {
+        
+    }
 }

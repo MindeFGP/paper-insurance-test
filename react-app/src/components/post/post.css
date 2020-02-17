@@ -1,0 +1,12 @@
+.author-photo {
+    max-height: 40px;
+    margin-right: 5px;
+}
+
+.post {
+    margin-bottom: 15px;
+}
+
+.post-title {
+    font-weight: bold;
+}

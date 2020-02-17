@@ -64,8 +64,12 @@ const App = () => {
       const authorData = appData.users.find(userData => {
         return userData.id === postData.userId
       })
+      const commentsData = appData.comments.filter(commentData => {
+        return commentData.postId === postData.id
+      })
+      
       if (authorData) {
-        const postModel = new PostModel(postData, authorData)
+        const postModel = new PostModel(postData, authorData, commentsData)
         postDetailsComponent = <Post postModel={postModel} viewMode={state.viewMode} />
       }
     }

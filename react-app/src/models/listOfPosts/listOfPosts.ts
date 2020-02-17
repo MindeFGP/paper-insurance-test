@@ -13,8 +13,12 @@ export class ListOfPosts implements ListOfPostsModelInterface {
             const authorData = appData.users.find(userData => {
                 return userData.id === postData.userId
             })
+            const commentsData = appData.comments.filter(commentData => {
+                return commentData.postId === postData.id
+            })
+            
             if (authorData) {
-                const post = new Post(postData, authorData)
+                const post = new Post(postData, authorData, commentsData)
                 this.posts.push(post)
             }
         })

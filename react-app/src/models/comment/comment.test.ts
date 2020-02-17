@@ -1,10 +1,10 @@
 import { CommentApiInterface } from "../../apiInterface/commentApiInterface"
-import { Comment as CommentModel } from "./comment"
+import { Comment } from "./comment"
 
 
 test("constructs model correctly from api data", () => {
     const commentData = getMockCommentData()
-    const commentModel = new CommentModel(commentData)
+    const commentModel = new Comment(commentData)
     expect(commentModel.id).toBe(1)
     expect(commentModel.postId).toBe(1)
     expect(commentModel.name).toBe("test commenter")
